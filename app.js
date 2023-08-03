@@ -35,8 +35,7 @@ async function checkWeather(city) {
   }
 }
 
-searchBtn.addEventListener("click", async (event) => {
-  event.preventDefault();
+async function handleSearch() {
   const city = searchBox.value.trim();
   if (city) {
     await checkWeather(city);
@@ -45,6 +44,18 @@ searchBtn.addEventListener("click", async (event) => {
     tempElement.innerHTML = "";
     humidityElement.innerHTML = "";
     windElement.innerHTML = "";
+  }
+}
+
+searchBtn.addEventListener("click", async (event) => {
+  event.preventDefault();
+  await handleSearch();
+});
+
+searchBox.addEventListener("keydown", async (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    await handleSearch();
   }
 });
 
